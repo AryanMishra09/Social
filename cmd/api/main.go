@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/AryanMishra09/Social/internal/env"
+	"github.com/AryanMishra09/Social/internal/store"
 	"github.com/joho/godotenv"
 )
 
@@ -19,8 +20,11 @@ func main() {
 		addr: env.GetString("ADDR", ":8000"),
 	}
 
+	store := store.NewStorage(nil)
+
 	app := &application{
 		config: cfg,
+		store:  store,
 	}
 
 	mux := app.mount()
